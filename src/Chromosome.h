@@ -15,9 +15,9 @@
 
 /* ------------------------------------------------------------------------
    Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
 #   include "mpi.h"
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff
    ------------------------------------------------------------------------ */
 
@@ -86,7 +86,7 @@ class Chromosome
 
 /* ------------------------------------------------------------------------
    Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     /**
      * Get read-only data for this chromosome for use with MPI_Send().
      * The data are handled by output function parameters.
@@ -136,7 +136,7 @@ class Chromosome
      */
     virtual void getMPIProps(void **buf, int *count, MPI_Datatype *type) = 0;
 
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff
    ------------------------------------------------------------------------ */
 

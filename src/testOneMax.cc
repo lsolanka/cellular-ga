@@ -19,7 +19,7 @@
 #include "ChromosomeFactory.h"
 
 
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
 #   include <mpi.h>
 #endif
 
@@ -54,7 +54,7 @@ class OneMaxGA : public CellularGA
 int main(int argc, char **argv)
 {
 
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     double start;
     double stop;
     int myRank;
@@ -113,7 +113,7 @@ int main(int argc, char **argv)
     /* End of GA code */
     /* ------------------------------------------------------------------- */
 
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     stop = MPI_Wtime();
 
     //cerr << "Average chromosome transmission time: " << ga->getAvgChrTime()

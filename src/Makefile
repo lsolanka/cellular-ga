@@ -46,18 +46,18 @@ DEPFILE = Makefile.dep
 
 BASE = args.o error.o CellularGA.o Chromosome.o OneMaxChromosome.o \
 	   NeuralNetwork.o \
-	   NNChromosome.o NNOneCharChromosome.o RecNeuralNet.o NNTrainData.o
 
-USE_MPI ?= 0
+HAVE_MPI ?= 0
 DEBUG ?= -DNDEBUG_ADDITIONAL
 CXXADD ?= 
 
-ifeq ($(USE_MPI), 1)
+ifeq ($(HAVE_MPI), 1)
 	CXX = mpicxx
-	CXXFLAGS = -O3 -g -W -Wall $(DEBUG) -DARC_MPI_ENABLED -std=c++0x
+	CXXFLAGS = -O3 -g -W -Wall $(DEBUG) -DHAVE_MPI -std=c++0x
 else
 	CXX = g++
 	CXXFLAGS = -O3 -g -W -Wall $(DEBUG) -std=c++0x
+	BASE += NNChromosome.o NNOneCharChromosome.o RecNeuralNet.o NNTrainData.o
 endif
 
 CXXFLAGS += $(CXXADD)
@@ -67,13 +67,13 @@ LDFLAGS = -lm
 
 .PHONY:	clean deps
 
-all: testNN
+all: testOneMax
 
 run: testOneMax
 	./testOneMax
 
 mpirun: testOneMax
-	mpirun -np 2 ./testOneMax
+	mpirun -np 4 ./testOneMax
 
 testOneMax: $(BASE) testOneMax.o
 	$(CXX) $(LDFLAGS) $(CXXFLAGS) -o testOneMax $(BASE) testOneMax.o

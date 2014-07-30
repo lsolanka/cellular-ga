@@ -17,9 +17,9 @@
 
 /* ------------------------------------------------------------------------
    Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
 #   include <mpi.h>
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff
    ------------------------------------------------------------------------ */
 
@@ -104,7 +104,7 @@ struct Grid
 
 /* ------------------------------------------------------------------------
    Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
 /**
  * Global MPI variables
  */
@@ -213,7 +213,7 @@ class GlobalMPI
     /**
      * Get the processor rank at the given position (at MPI processors grid).
      * This function has only
-     * meaning when ARC_MPI_ENABLED is defined.
+     * meaning when HAVE_MPI is defined.
      *
      * @param p Specified global postition.
      * @return Process rank
@@ -227,7 +227,7 @@ class GlobalMPI
         return procY * MatrixSize + procX;
     }
 };
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff
    ------------------------------------------------------------------------ */
 
@@ -378,7 +378,7 @@ class CellularGA
      * Return a chromosome, determined by the _global_ position p.
      *
      * @param p Position of the chromosome in the GLOBAL grid. This is used in
-     *   when the ARC_MPI_ENABLED flag is defined. This function may communicate
+     *   when the HAVE_MPI flag is defined. This function may communicate
      *   an individual from different demes, using MPI. In case MPI is disabled,
      *   the global grid == local grid.
      * @return Chromosome at the given position. If MPI is enabled, this
@@ -460,7 +460,7 @@ class CellularGA
 
 /* ------------------------------------------------------------------------
    Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
 #   define MPINEIGHBOUR_MAX 4
 
     static const int GAMPI_TAG_CHRSEND;
@@ -692,7 +692,7 @@ class CellularGA
     void setMPIParams();
 
 
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff
    ------------------------------------------------------------------------ */
 

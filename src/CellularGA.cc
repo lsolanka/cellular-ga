@@ -58,10 +58,10 @@ const int CellularGA::randomWalkYMap[] = {-1, 0, 1,  0 };
 
 CellularGA::CellularGA(const InitParams initParams) :
 /* Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     gMPI(initParams), 
     neighbours(gMPI),
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff */
 
     params(initParams), lGrid(getLocalGrid())
@@ -78,7 +78,7 @@ CellularGA::CellularGA(const InitParams initParams) :
 
 
 /* Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     remoteChromosomesRequested = 0;
     chromosomesRequested = 0;
 
@@ -102,7 +102,7 @@ CellularGA::CellularGA(const InitParams initParams) :
         throw GAException(msg);
     }
 
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff */
 
     initPopulation();
@@ -136,9 +136,9 @@ CellularGA::~CellularGA()
     delete []pop;
 
 /* Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     delete mpiStats;
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff */
 
 }
@@ -169,7 +169,7 @@ void CellularGA::initPopulation()
 
 Grid CellularGA::getLocalGrid() const
 {
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     Grid ret;
 
     /*
@@ -232,9 +232,9 @@ void CellularGA::run()
 
 
 /* Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     if (gMPI.getMyRank() == ROOT_NODE)
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff */
 
     {
@@ -268,7 +268,7 @@ void CellularGA::step()
         /* Determine a random point in the local grid */
         Grid p = getLocalRandomPoint();
 
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
         pollMPIAction();
 #endif
     
@@ -281,7 +281,7 @@ void CellularGA::step()
         else
             assert(false);
 
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
         pollMPIAction();
 #endif
     
@@ -321,11 +321,11 @@ void CellularGA::step()
 
 
 /* Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     if (gMPI.getMyRank() == ROOT_NODE)
     {
         recvMPIStatistics();
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff */
 
 
@@ -349,7 +349,7 @@ void CellularGA::step()
         }
 
 /* Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     }
     else
     {
@@ -358,7 +358,7 @@ void CellularGA::step()
     }
 
     dbg_func(printRemoteChromosomeRatio());
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff */
 
     generation++;
@@ -460,7 +460,7 @@ Chromosome *CellularGA::getGlobalChromosome(Grid p)
 
     Chromosome *ret = NULL;
 
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     double start = MPI_Wtime();
     int myRank = gMPI.getMyRank();
     int chrProcessRank = gMPI.translateGlobalPosToRank(p);
@@ -487,7 +487,7 @@ Chromosome *CellularGA::getGlobalChromosome(Grid p)
     chrReq++;
 #else
     ret = pop[p.x][p.y];
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 
     return ret;
 }
@@ -496,7 +496,7 @@ Chromosome *CellularGA::getGlobalChromosome(Grid p)
 
 Grid CellularGA::translateLocalToGlobalPos(Grid p) const
 {
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     Grid myPos = gMPI.getMyMatrixPos();
     return Grid(myPos.x * gMPI.getProcGridSize().x + p.x,
                 myPos.y * gMPI.getProcGridSize().y + p.y);
@@ -552,9 +552,9 @@ double CellularGA::globalBestIndividualFitness()
 {
 
 /* Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     return globalStat.bestFitness;
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff */
 
     return bestIndividualFitness();
@@ -565,9 +565,9 @@ double CellularGA::globalBestIndividualFitness()
 const Chromosome *CellularGA::getGlobalBestIndividual()
 {
 /* Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     return globalStat.bestChromosome;
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff */
 
     return getBestIndividual();
@@ -578,9 +578,9 @@ const Chromosome *CellularGA::getGlobalBestIndividual()
 double CellularGA::globalAvgFitness()
 {
 /* Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     return globalStat.fitnessSum / (params.gridXSize * params.gridYSize);
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff */
 
     return avgFitness();
@@ -591,7 +591,7 @@ double CellularGA::globalAvgFitness()
 /* -------------------------------------------------------------------
  * MPI communication functions
  * ------------------------------------------------------------------- */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
 const int CellularGA::GAMPI_TAG_CHRSEND     = 0;
 const int CellularGA::GAMPI_TAG_CHRREQ      = 1;
 const int CellularGA::GAMPI_TAG_FSUM        = 2;
@@ -1108,7 +1108,7 @@ bool CellularGA::MPIStats::getStat(GAStat &stat)
 
 /* ------------------------------------------------------------------------ */
 
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 
 
 /* End of file CellularGA.cc */

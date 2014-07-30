@@ -17,9 +17,9 @@
 
 
 /* Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
 #   include "mpi.h"
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff */
 
 
@@ -97,7 +97,7 @@ class OneMaxChromosome : public Chromosome
 
 /* ------------------------------------------------------------------------
    Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
 
     /**
      * See Chromosome description for this function.
@@ -120,7 +120,7 @@ class OneMaxChromosome : public Chromosome
      * See Chromosome description for this function.
      */
     Chromosome *getNewFromMPI(void *buf, int siz) const;
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff
    ------------------------------------------------------------------------ */
 

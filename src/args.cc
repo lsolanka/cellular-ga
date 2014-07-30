@@ -14,9 +14,9 @@
 
 
 /* Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
 #   include "mpi.h"
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff */
 
 
@@ -250,13 +250,13 @@ bool parseArg(char **argv, const char *wantArg, int *cnt)
 void printErr(int exit_flag, const ostringstream &errMsg)
 {
 /* Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     int myRank;
     
     MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
 
     if (myRank == ROOT_NODE)
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff */
     {
         cerr << errMsg.str();
@@ -282,9 +282,9 @@ int check_counter(int counter, int max)
 void finalize()
 {
 /* Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
     MPI_Finalize();
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff */
 }
 

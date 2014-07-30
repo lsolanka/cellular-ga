@@ -25,7 +25,7 @@
 using namespace std;
 
 
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
 #   include <mpi.h>
 #endif
 

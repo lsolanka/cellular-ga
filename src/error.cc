@@ -14,7 +14,7 @@
 
 /* ------------------------------------------------------------------------
    Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
 
 /**
  * Print MPI error message to cerr
@@ -35,7 +35,7 @@ void printMPIError(int errNum)
 #endif /* NO_MPI_ERROR_PRINT */
 }
 
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff
    ------------------------------------------------------------------------ */
 

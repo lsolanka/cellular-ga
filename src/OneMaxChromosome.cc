@@ -169,7 +169,7 @@ void OneMaxChromosome::print(std::ostream &s) const
 
 /* ------------------------------------------------------------------------
    Begin MPI Stuff */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
 void OneMaxChromosome::
         getMPISendData(const void **buf, int *count, MPI_Datatype *type) const
 {
@@ -205,7 +205,7 @@ Chromosome *OneMaxChromosome::getNewFromMPI(void *buf, int siz) const
     return new OneMaxChromosome((unsigned char *) buf, siz);
 }
 
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End MPI Stuff
    ------------------------------------------------------------------------ */
 

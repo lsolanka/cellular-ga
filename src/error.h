@@ -17,7 +17,7 @@
 
 /* ------------------------------------------------------------------------ */
 /* Start of ARC MPI block */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
 
 #include "mpi.h"
 
@@ -40,7 +40,7 @@ void printMPIError(int errNum);
     }                                   \
 }
 
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 /* End of ARC MPI block */
 /* ------------------------------------------------------------------------ */
 

@@ -63,6 +63,8 @@ class OneMaxChromosomeFactory : public ChromosomeFactory
 };
 
 
+#ifndef HAVE_MPI
+
 /**
  * Neural Net Chromosome factory. Produces a neural network chromosome.
  */
@@ -96,6 +98,8 @@ class NNChromosomeFactory : public ChromosomeFactory
     const unsigned* lSizes;
     const NNTrainData& trainData;
 };
+
+#endif // HAVE_MPI
 
 
 #endif /* CHROMOSOMEFACTORY_H */

@@ -22,7 +22,7 @@
     /*********************************************************************
     * prints debugging message to stderr
     */
-#ifdef ARC_MPI_ENABLED
+#ifdef HAVE_MPI
 #   define dbg_msg(a)                                                                       \
     {                                                                                       \
         int __rank;                                                                         \
@@ -31,7 +31,7 @@
     }
 #else
 #   define dbg_msg(a)      std::cerr << __func__ << ": " << a << std::flush;
-#endif /* ARC_MPI_ENABLED */
+#endif /* HAVE_MPI */
 #   define dbg_func(a) a
 
 #endif
