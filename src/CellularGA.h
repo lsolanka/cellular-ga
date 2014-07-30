@@ -251,7 +251,7 @@ class CellularGA
      * @paratm popSize Population size
      */
     CellularGA(const InitParams initParams);
-    ~CellularGA();
+    virtual ~CellularGA();
 
     /**
      * Start the genetic algorithm

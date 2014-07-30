@@ -49,14 +49,14 @@ BASE = args.o error.o CellularGA.o Chromosome.o OneMaxChromosome.o \
 
 HAVE_MPI ?= 0
 DEBUG ?= -DNDEBUG_ADDITIONAL
-CXXADD ?= 
+CXXADD ?= -Wno-unused-parameter
 
 ifeq ($(HAVE_MPI), 1)
 	CXX = mpicxx
-	CXXFLAGS = -O3 -g -W -Wall $(DEBUG) -DHAVE_MPI -std=c++0x
+	CXXFLAGS = -O3 -g -W -Wall $(DEBUG) -DHAVE_MPI -std=c++11
 else
 	CXX = g++
-	CXXFLAGS = -O3 -g -W -Wall $(DEBUG) -std=c++0x
+	CXXFLAGS = -O3 -g -W -Wall $(DEBUG) -std=c++11
 	BASE += NNChromosome.o NNOneCharChromosome.o RecNeuralNet.o NNTrainData.o
 endif
 
@@ -67,7 +67,12 @@ LDFLAGS = -lm
 
 .PHONY:	clean deps
 
-all: testOneMax
+testOneMax: $(BASE) testOneMax.o
+	$(CXX) $(LDFLAGS) $(CXXFLAGS) -o testOneMax $(BASE) testOneMax.o
+
+testNN: $(BASE) testNN.o
+	$(CXX) $(LDFLAGS) $(CXXFLAGS) -o testNN $(BASE) testNN.o
+
 
 run: testOneMax
 	./testOneMax
@@ -75,11 +80,7 @@ run: testOneMax
 mpirun: testOneMax
 	mpirun -np 4 ./testOneMax
 
-testOneMax: $(BASE) testOneMax.o
-	$(CXX) $(LDFLAGS) $(CXXFLAGS) -o testOneMax $(BASE) testOneMax.o
-
-testNN: $(BASE) testNN.o
-	$(CXX) $(LDFLAGS) $(CXXFLAGS) -o testNN $(BASE) testNN.o
+all: testOneMax testNN
 
 kill:
 	killall testOneMax

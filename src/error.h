@@ -66,7 +66,7 @@ class GenericException : public std::exception
 
     ~GenericException() throw() {}
 
-    const char* what()
+    const char* what() const noexcept
     {
         return msg.c_str();
     }
@@ -100,7 +100,7 @@ class NNException : public GenericException
 
     ~NNException() throw() {}
 
-    const char* what()
+    const char* what() const noexcept
     {
         return (std::string("Neural network error: ") + msg).c_str();
     }

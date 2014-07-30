@@ -80,7 +80,7 @@ int main(int argc, char **argv)
 
     try 
     {
-        unsigned int i;
+        unsigned int i = 7;
 
         init.chrFactory = &factory;
 

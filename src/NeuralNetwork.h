@@ -254,7 +254,6 @@ class NNInputLayer : public NNLayer
      */
     void biasWeights(unsigned n, double mRate)
     {
-        n = 0; mRate = 0; /* Fake, not used */
         std::ostringstream err;
         err << "An attempt to bias weights in an Input layer." << std::endl;
         throw NNException(err);
@@ -268,7 +267,6 @@ class NNInputLayer : public NNLayer
      */
     double getWeight(unsigned n, unsigned w) const
     {
-        n = 0; w = 0; /* Fake, not used */
         std::ostringstream err;
         err << "An attempt to get weight value in an Input layer." << std::endl;
         throw NNException(err);
@@ -276,7 +274,6 @@ class NNInputLayer : public NNLayer
     
     void combineUniform(const NNLayer* l)
     {
-        l = NULL; /* Fake, not used */
         std::ostringstream err;
         err << "An attempt to combine input layer." << std::endl;
         throw NNException(err);
@@ -284,7 +281,6 @@ class NNInputLayer : public NNLayer
 
     void averageWeights(const NNLayer* l)
     {
-        l = NULL; /* Fake, not used */
         std::ostringstream err;
         err << "An attempt to average input layer." << std::endl;
         throw NNException(err);
