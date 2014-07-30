@@ -36,8 +36,8 @@ void testNet(NeuralNetwork& nn, const NNTrainData& td, ostream& s,
         bool printStat, const char* testFile);
 
 
-const char trainBitmapFile[] = "../fonts/trainData.vystrel0.05.gauss0.5.bmp";
-const char trainTxtFile[]    = "../fonts/trainData.vystrel0.05.gauss0.5.txt";
+const char trainBitmapFile[] = "../fonts/trainData.shot-noise.0.05.gauss0.5.bmp";
+const char trainTxtFile[]    = "../fonts/trainData.shot-noise.0.05.gauss0.5.txt";
 //const char trainBitmapFile[] = "../fonts/trainData.allchars.bmp";
 //const char trainTxtFile[]    = "../fonts/trainData.allchars.txt";
 //const char trainBitmapFile[] = "../fonts/trainData.bmp";
@@ -45,16 +45,16 @@ const char trainTxtFile[]    = "../fonts/trainData.vystrel0.05.gauss0.5.txt";
 
 const unsigned numTestFiles = 10;
 const char* (testBitmapFiles[]) = {
-    "../fonts/testData.vystrel.0.02.bmp",
-    "../fonts/testData.vystrel.0.04.bmp",
-    "../fonts/testData.vystrel.0.06.bmp",
-    "../fonts/testData.vystrel.0.08.bmp",
-    "../fonts/testData.vystrel.0.1.bmp",
-    "../fonts/testData.vystrel.0.12.bmp",
-    "../fonts/testData.vystrel.0.14.bmp",
-    "../fonts/testData.vystrel.0.16.bmp",
-    "../fonts/testData.vystrel.0.18.bmp",
-    "../fonts/testData.vystrel.0.20.bmp"
+    "../fonts/testData.shot-noise.0.02.bmp",
+    "../fonts/testData.shot-noise.0.04.bmp",
+    "../fonts/testData.shot-noise.0.06.bmp",
+    "../fonts/testData.shot-noise.0.08.bmp",
+    "../fonts/testData.shot-noise.0.1.bmp",
+    "../fonts/testData.shot-noise.0.12.bmp",
+    "../fonts/testData.shot-noise.0.14.bmp",
+    "../fonts/testData.shot-noise.0.16.bmp",
+    "../fonts/testData.shot-noise.0.18.bmp",
+    "../fonts/testData.shot-noise.0.20.bmp"
 };
 
 const char* testTxtFiles[] = {

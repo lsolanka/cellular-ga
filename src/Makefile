@@ -41,7 +41,7 @@ PACK_FILES = ARCtest.sh \
 			 SimpleBitArray.h	\
 			 testOneMax.cc
 
-BIN = testOneMax *.o
+BIN = testOneMax testNN *.o
 DEPFILE = Makefile.dep
 
 BASE = args.o error.o CellularGA.o Chromosome.o OneMaxChromosome.o \
